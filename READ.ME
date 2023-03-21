@@ -1,0 +1,62 @@
+
+
+## How to connect client-side to server-side
+If using a cloud service like AWS, create two virtual machine in ubuntu
+
+Log into both VM using ssh using `sudo ssh -i "keypair" ubuntu@ipaddress of the instances`
+
+Use one VM as clientside and the other as the server-side
+
+Generate a key on the client-side with `ssh-keygen`
+
+Install open ssh server on the server side `sudo apt install openssh-server -y`
+
+To transfer/share the ssh to the server, `ssh-copy-id -i /home/ubuntu/.ssh/key-gen pub file name ubuntu@Ip address of serverside`
+
+If you got this error
+
+![Permission-denied](./images/serverside-permission-denied.PNG)
+
+It means you need to create a passwork for the root of the sever-side with, 
+`sudo i`, then `sudo passwd ubuntu`run command in server-side
+
+![Solution](./images/serverside-permission-denied-solution.PNG)
+
+Then re-run the ssh transfer command
+
+After running the command to transfer ssh, it then give you a command that will be used to connect to server side `ssh ip address` something like this
+
+## How To send a file from your local to server
+
+`scp file name ubuntu@ipaddress:destination`/ `scp source-name server-name:destination`
+
+## How to download a file from server side to client side
+
+`sftp ip address of server` if you have been connected to server side before 
+
+`ls` To see that the file you have is there
+
+`get file name` if it is a folder, do `get -r name of folder`
+
+`exit` to leave sftp
+
+You will see that you have the file in your client side now `ls -ltr` to confirm
+
+## To upload to server from client-side using sftp
+connect to server as user by doing,  `sftp ipaddress of server` from client side
+sftp requires that there must be a file/folder with the same name as the one you want to upload, so create the file/folder
+`put -r folder name`
+
+## To upload from client side to server-side using scp
+
+`scp file name ipadress of server:destination in server-side`/ `scp file name ip address of server:destination` add -r if it is a folder
+
+## How to download a file from server side to client side using scp
+
+`scp -r ip address of server:relative path of folder .`
+
+
+`code`
+
+
+
